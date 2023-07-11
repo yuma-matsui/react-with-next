@@ -1,17 +1,24 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React from "react";
 
+import User from "@/components/User";
+import usePost from "@/hooks/usePost";
+
 const PostPage: NextPage = () => {
-  const { query } = useRouter();
+  const { post, error, isLoading } = usePost();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Something went wrong!</p>;
 
   return (
     <>
       <Head>
-        <title>Post Page</title>
+        <title>{`Post ${post?.id} Page`}</title>
       </Head>
-      <h2>test {query.id}</h2>
+      <h2>{post?.title}</h2>
+      <p>{post?.body}</p>
+      <User id={post?.userId} />
     </>
   );
 };
