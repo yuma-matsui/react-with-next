@@ -28,6 +28,7 @@ module.exports = {
   },
   plugins: ["@typescript-eslint", "react", "simple-import-sort"],
   rules: {
+    "@typescript-eslint/no-unused-vars": "warn",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
   },
