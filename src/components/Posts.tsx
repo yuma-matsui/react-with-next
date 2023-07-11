@@ -1,43 +1,6 @@
-import React, { FC, Reducer, useCallback, useEffect, useReducer } from "react";
+import React, { FC, useCallback, useEffect, useReducer } from "react";
 
-type Post = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-};
-
-type PostsState = {
-  posts: Post[];
-  loading: boolean;
-  error: Error | null;
-};
-
-type Action =
-  | {
-      type: "posts";
-      payload: {
-        value: PostsState["posts"];
-      };
-    }
-  | {
-      type: "error";
-      payload: {
-        value: PostsState["error"];
-      };
-    };
-
-const postsReducer: Reducer<PostsState, Action> = (state, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case "posts":
-      return { ...state, posts: payload.value, loading: false };
-    case "error":
-      return { ...state, error: payload.value, loading: false };
-    default:
-      throw new Error("No such action type.");
-  }
-};
+import postsReducer from "@/reducer/posts";
 
 const Posts: FC = () => {
   const [postsState, dispatch] = useReducer(postsReducer, {
