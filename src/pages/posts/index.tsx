@@ -2,17 +2,17 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 
-const Home: NextPage = () => {
+import Posts from "@/components/Posts";
+
+const PostsPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Index Page</title>
+        <title>Posts Page</title>
       </Head>
-      <div>
-        <h1>Top Page</h1>
-      </div>
+      <Posts />
     </>
   );
 };
 
-export default Home;
+export default PostsPage;
