@@ -5,6 +5,7 @@ import { FC } from "react";
 const NAV_ITEMS = [
   { href: "/", label: "Index" },
   { href: "/posts", label: "Posts" },
+  { href: "/users", label: "Users" },
 ];
 
 const Header: FC = () => {
