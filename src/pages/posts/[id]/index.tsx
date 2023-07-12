@@ -1,9 +1,9 @@
 import { NextPage } from "next";
-import Head from "next/head";
 import React from "react";
 
 import User from "@/components/User";
 import usePost from "@/hooks/usePost";
+import Layout from "@/layouts/Layout";
 
 const PostPage: NextPage = () => {
   const { post, error, isLoading } = usePost();
@@ -12,14 +12,11 @@ const PostPage: NextPage = () => {
   if (error) return <p>Something went wrong!</p>;
 
   return (
-    <>
-      <Head>
-        <title>{`Post ${post?.id} Page`}</title>
-      </Head>
+    <Layout title={`Post ${post?.id} Page`}>
       <h2>{post?.title}</h2>
       <p>{post?.body}</p>
       <User id={post?.userId} />
-    </>
+    </Layout>
   );
 };
 

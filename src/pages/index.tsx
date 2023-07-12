@@ -1,18 +1,13 @@
 import { NextPage } from "next";
-import Head from "next/head";
 import React from "react";
 
-import Header from "@/components/Header";
+import Layout from "@/layouts/Layout";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Head>
-        <title>Index Page</title>
-      </Head>
-      <Header />
+    <Layout title="Index Page">
       <h1>Top Page</h1>
-    </>
+    </Layout>
   );
 };
 
