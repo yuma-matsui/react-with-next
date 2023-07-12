@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 
-import Posts from "@/components/Posts";
+import { Posts } from "@/components/Posts";
 import Layout from "@/layouts/Layout";
 
 const PostsPage: NextPage = () => {
