@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { FC } from "react";
 
 import useUser from "@/hooks/useUser";
@@ -14,7 +15,9 @@ const User: FC<Props> = ({ id }) => {
 
   return (
     <>
-      <h3>{user?.name}</h3>
+      <Link href={`/users/${user?.id}`}>
+        <h3>{user?.name}</h3>
+      </Link>
       <p>{user?.email}</p>
     </>
   );
