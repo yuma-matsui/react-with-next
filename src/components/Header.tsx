@@ -11,7 +11,7 @@ const NAV_ITEMS = [
 
 const Header: FC = () => {
   return (
-    <header className="flex justify-around items-center border-b w-full h-24">
+    <header className="flex justify-around items-center border-b w-full h-24 mb-4">
       {NAV_ITEMS.map(({ href, label }) => (
         <Link
           href={href}
