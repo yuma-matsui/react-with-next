@@ -3,8 +3,12 @@ import React, { FC } from "react";
 
 import useUser from "@/hooks/useUser";
 
-const User: FC = () => {
-  const { data, error, isLoading } = useUser();
+type Props = {
+  id: number;
+};
+
+const User: FC<Props> = ({ id }) => {
+  const { data, error, isLoading } = useUser(id);
 
   if (error) return <p>Something went wrong!!</p>;
   if (isLoading) return <p>Loading...</p>;

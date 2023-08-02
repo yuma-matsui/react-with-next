@@ -15,7 +15,7 @@ const Post = () => {
     <>
       <h2>{data?.title}</h2>
       <p>{data?.body}</p>
-      <User />
+      {data && <User id={data.userId} />}
       {data && <CommentsByPostId postId={data.id} />}
     </>
   );
