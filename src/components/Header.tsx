@@ -11,9 +11,13 @@ const NAV_ITEMS = [
 
 const Header: FC = () => {
   return (
-    <header>
+    <header className="flex justify-around items-center border-b w-full h-24">
       {NAV_ITEMS.map(({ href, label }) => (
-        <Link href={href} key={href}>
+        <Link
+          href={href}
+          key={href}
+          className="inline-block py-2 px-6 text-xl hover:text-blue-500 focus:text-blue-500 active:text-blue-500"
+        >
           {label}
         </Link>
       ))}

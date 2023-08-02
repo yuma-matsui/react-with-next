@@ -15,7 +15,7 @@ const Layout: FC<Props> = ({ title, children }) => {
         <title>{title}</title>
       </Head>
       <Header />
-      {children}
+      <div className="flex flex-col mx-auto max-w-2xl items-center px-2 ">{children}</div>
     </>
   );
 };
