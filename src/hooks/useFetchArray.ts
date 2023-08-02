@@ -1,9 +1,7 @@
 import useSWR from "swr";
 
-import fetcher from "@/utils/fetcher";
-
 const useFetchArray = <T>(url: string) => {
-  const { data, error, isLoading } = useSWR<T[], Error>(url, fetcher);
+  const { data, error, isLoading } = useSWR<T[], Error>(url);
 
   return {
     data,

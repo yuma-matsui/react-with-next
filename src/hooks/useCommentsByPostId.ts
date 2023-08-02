@@ -1,8 +1,9 @@
 import Comment from "@/type/comment.type";
+import baseURL from "@/utils/baseURL";
 
 import useFetchArray from "./useFetchArray";
 
 const useCommentsByPostId = (postId: number) =>
-  useFetchArray<Comment>(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+  useFetchArray<Comment>(`${baseURL}/comments?postId=${postId}`);
 
 export default useCommentsByPostId;

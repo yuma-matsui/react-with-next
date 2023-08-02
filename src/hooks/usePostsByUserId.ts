@@ -1,8 +1,9 @@
 import Post from "@/type/post.type";
+import baseURL from "@/utils/baseURL";
 
 import useFetchArray from "./useFetchArray";
 
 const usePostsByUserId = (userId: number) =>
-  useFetchArray<Post>(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
+  useFetchArray<Post>(`${baseURL}/posts?userId=${userId}`);
 
 export default usePostsByUserId;

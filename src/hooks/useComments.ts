@@ -1,7 +1,8 @@
 import Comment from "@/type/comment.type";
+import baseURL from "@/utils/baseURL";
 
 import useFetchArray from "./useFetchArray";
 
-const useComments = () => useFetchArray<Comment>("https://jsonplaceholder.typicode.com/comments");
+const useComments = () => useFetchArray<Comment>(`${baseURL}/comments`);
 
 export default useComments;
