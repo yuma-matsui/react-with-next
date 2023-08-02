@@ -11,16 +11,16 @@ const Users: FC = () => {
   if (!hasData) return <p>データは空です</p>;
 
   return (
-    <>
-      <h1>Users</h1>
-      <ol>
-        {data?.map((user) => (
-          <li key={user.id}>
-            <Link href={`/users/${user.id}`}>{user.name}</Link>
-          </li>
-        ))}
-      </ol>
-    </>
+    <ul className="grid grid-cols-3 gap-4">
+      {data?.map((user) => (
+        <li key={user.id}>
+          <Link href={`/users/${user.id}`} className="block p-3 shadow rounded hover:bg-gray-100">
+            <h2 className="font-bold">{user.name}</h2>
+            <div className="text-sm">{user.email}</div>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 };
 
