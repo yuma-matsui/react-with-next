@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { FC } from "react";
 
 import useCommentsByPostId from "@/hooks/useCommentsByPostId";
@@ -15,10 +16,15 @@ const CommentsByPostId: FC<Props> = ({ postId }) => {
   if (!hasData) return <p>No Comments!</p>;
 
   return (
-    <>
-      <h3>Comments</h3>
-      <ul>{data?.map((comment) => <li key={comment.id}>{comment.body}</li>)}</ul>
-    </>
+    <ul className="space-y-2">
+      {data?.map((comment) => (
+        <li className="border-b pb-2" key={comment.id}>
+          <Link href={`/comments/${comment.id}`} className="block text-sm hover:text-blue-500">
+            {comment.body}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 };
 

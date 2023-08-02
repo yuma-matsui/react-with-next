@@ -11,16 +11,15 @@ const Comments: FC = () => {
   if (!hasData) return <p>データは空です</p>;
 
   return (
-    <>
-      <h1>Comments</h1>
-      <ol>
-        {data?.map(({ id, name }) => (
-          <li key={id}>
-            <Link href={`/comments/${id}`}>{name}</Link>
-          </li>
-        ))}
-      </ol>
-    </>
+    <ul className="space-y-2">
+      {data?.map(({ id, body }) => (
+        <li key={id} className="border-b pb-2">
+          <Link href={`/comments/${id}`} className="block text-sm hover:text-blue-500">
+            {body}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 };
 

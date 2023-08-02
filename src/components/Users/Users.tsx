@@ -15,7 +15,7 @@ const Users: FC = () => {
       {data?.map((user) => (
         <li key={user.id}>
           <Link href={`/users/${user.id}`} className="block p-3 shadow rounded hover:bg-gray-100">
-            <h2 className="font-bold">{user.name}</h2>
+            <h2 className="font-bold truncate">{user.name}</h2>
             <div className="text-sm">{user.email}</div>
           </Link>
         </li>

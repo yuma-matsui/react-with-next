@@ -3,7 +3,6 @@ import React from "react";
 import usePost from "@/hooks/usePost";
 
 import { CommentsByPostId } from "../Comments";
-import { User } from "../Users";
 
 const Post = () => {
   const { data, error, isLoading } = usePost();
@@ -13,9 +12,9 @@ const Post = () => {
 
   return (
     <>
-      <h2>{data?.title}</h2>
-      <p>{data?.body}</p>
-      {data && <User id={data.userId} />}
+      <h2 className="text-xl font-bold">{data?.title}</h2>
+      <p className="text-gray-900">{data?.body}</p>
+      <h2 className="text-lg font-bold my-4">コメント一覧</h2>
       {data && <CommentsByPostId postId={data.id} />}
     </>
   );
