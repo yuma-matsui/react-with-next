@@ -2,6 +2,7 @@ import React from "react";
 
 import usePost from "@/hooks/usePost";
 
+import { CommentsByPostId } from "../Comments";
 import { User } from "../Users";
 
 const Post = () => {
@@ -15,6 +16,7 @@ const Post = () => {
       <h2>{data?.title}</h2>
       <p>{data?.body}</p>
       <User />
+      {data && <CommentsByPostId postId={data.id} />}
     </>
   );
 };
