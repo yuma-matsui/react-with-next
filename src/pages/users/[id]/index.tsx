@@ -11,7 +11,7 @@ const UserPage: NextPage = () => {
 
   return (
     <Layout title={`User ${id} Page`}>
-      <User id={id} />
+      <User />
     </Layout>
   );
 };

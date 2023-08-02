@@ -1,17 +1,14 @@
-import useSWR from "swr";
+import { useRouter } from "next/router";
 
 import User from "@/type/user.type";
-import fetcher from "@/utils/fetcher";
 
-const useUser = (id: number | undefined) => {
-  const url = id ? `https://jsonplaceholder.typicode.com/users/${id}` : null;
-  const { data, error, isLoading } = useSWR<User>(url, fetcher);
+import useFetchSingleData from "./useFetchSingleData";
 
-  return {
-    user: data,
-    error,
-    isLoading,
-  };
+const useUser = () => {
+  const { query } = useRouter();
+  const url = query.id ? `https://jsonplaceholder.typicode.com/users/${query.id}` : null;
+
+  return useFetchSingleData<User>(url);
 };
 
 export default useUser;

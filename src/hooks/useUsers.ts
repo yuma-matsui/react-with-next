@@ -1,20 +1,7 @@
-import useSWR from "swr";
-
 import User from "@/type/user.type";
-import fetcher from "@/utils/fetcher";
 
-const useUsers = () => {
-  const { data, error, isLoading } = useSWR<User[]>(
-    "https://jsonplaceholder.typicode.com/users",
-    fetcher,
-  );
+import useFetchArray from "./useFetchArray";
 
-  return {
-    users: data,
-    error,
-    isLoading,
-    hasUsers: data && data.length > 0,
-  };
-};
+const useUsers = () => useFetchArray<User>("https://jsonplaceholder.typicode.com/users");
 
 export default useUsers;

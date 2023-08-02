@@ -1,20 +1,7 @@
-import useSWR from "swr";
-
 import Post from "@/type/post.type";
-import fetcher from "@/utils/fetcher";
 
-const usePosts = () => {
-  const { data, error, isLoading } = useSWR<Post[]>(
-    "https://jsonplaceholder.typicode.com/posts",
-    fetcher,
-  );
+import useFetchArray from "./useFetchArray";
 
-  return {
-    posts: data ?? [],
-    error,
-    isLoading,
-    hasPosts: data && data.length > 0,
-  };
-};
+const usePosts = () => useFetchArray<Post>("https://jsonplaceholder.typicode.com/posts");
 
 export default usePosts;
