@@ -1,7 +1,7 @@
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 const useFetchSingleData = <T>(url: string | null) => {
-  const { data, error, isLoading } = useSWR<T>(url);
+  const { data, error, isLoading } = useSWRImmutable<T>(url);
 
   return {
     data,

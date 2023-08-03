@@ -4,9 +4,9 @@ import React, { FC } from "react";
 import useUsers from "@/hooks/useUsers";
 
 const Users: FC = () => {
-  const { data, isLoading, error, hasData } = useUsers();
+  const { data, error, hasData } = useUsers();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (!hasData && !error) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
   if (!hasData) return <p>データは空です</p>;
 

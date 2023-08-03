@@ -8,9 +8,9 @@ type Props = {
 };
 
 const PostsByUserId: FC<Props> = ({ userId }) => {
-  const { data, isLoading, error, hasData } = usePostsByUserId(userId);
+  const { data, error, hasData } = usePostsByUserId(userId);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (!hasData && !error) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
   if (!hasData) return <p>No Posts!</p>;
 

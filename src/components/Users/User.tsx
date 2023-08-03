@@ -10,10 +10,10 @@ type Props = {
 };
 
 const User: FC<Props> = ({ id }) => {
-  const { data, error, isLoading } = useUser(id);
+  const { data, error } = useUser(id);
 
   if (error) return <p>Something went wrong!!</p>;
-  if (isLoading) return <p>Loading...</p>;
+  if (!data && !error) return <p>Loading...</p>;
 
   return (
     <>
