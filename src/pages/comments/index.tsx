@@ -5,12 +5,13 @@ import { SWRConfig } from "swr";
 import { Comments } from "@/components/Comments";
 import Layout from "@/layouts/Layout";
 import Comment from "@/type/comment.type";
+import baseURL from "@/utils/baseURL";
 
 export const getStaticProps: GetStaticProps<{
   comments: Comment[];
   url: string;
 }> = async () => {
-  const COMMENTS_API_URL = "https://jsonplaceholder.typicode.com/comments";
+  const COMMENTS_API_URL = `${baseURL}/comments`;
   const response = await fetch(COMMENTS_API_URL);
   const comments: Comment[] = await response.json();
 

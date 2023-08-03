@@ -5,12 +5,13 @@ import { SWRConfig } from "swr";
 import { Users } from "@/components/Users";
 import Layout from "@/layouts/Layout";
 import User from "@/type/user.type";
+import baseURL from "@/utils/baseURL";
 
 export const getServerSideProps: GetServerSideProps<{
   users: User[];
   url: string;
 }> = async () => {
-  const USER_API_URL = "https://jsonplaceholder.typicode.com/users";
+  const USER_API_URL = `${baseURL}/users`;
   const response = await fetch(USER_API_URL);
   const users: User[] = await response.json();
 

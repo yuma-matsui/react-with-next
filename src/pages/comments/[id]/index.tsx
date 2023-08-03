@@ -6,9 +6,10 @@ import { SWRConfig } from "swr";
 import { Comment } from "@/components/Comments";
 import Layout from "@/layouts/Layout";
 import CommentType from "@/type/comment.type";
+import baseURL from "@/utils/baseURL";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/comments?_limit=10");
+  const response = await fetch(`${baseURL}/comments?_limit=10`);
   const comments: CommentType[] = await response.json();
   const paths = comments.map((comment) => ({
     params: { id: String(comment.id) },
@@ -24,7 +25,7 @@ export const getStaticProps: GetStaticProps<{
   comment: Comment[];
   url: string;
 }> = async ({ params }) => {
-  const COMMENT_API_URL = `https://jsonplaceholder.typicode.com/comments/${params?.id}`;
+  const COMMENT_API_URL = `${baseURL}/comments/${params?.id}`;
   const response = await fetch(COMMENT_API_URL);
 
   if (!response.ok) return { notFound: true };

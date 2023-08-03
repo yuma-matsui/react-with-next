@@ -7,6 +7,7 @@ import { User } from "@/components/Users";
 import Layout from "@/layouts/Layout";
 import Post from "@/type/post.type";
 import UserType from "@/type/user.type";
+import baseURL from "@/utils/baseURL";
 
 export const getServerSideProps: GetServerSideProps<{
   user: UserType;
@@ -17,11 +18,11 @@ export const getServerSideProps: GetServerSideProps<{
   };
 }> = async (ctx) => {
   const { id } = ctx.query;
-  const USER_API_URL = `https://jsonplaceholder.typicode.com/users/${id}`;
+  const USER_API_URL = `${baseURL}/users/${id}`;
   const response = await fetch(USER_API_URL);
   const user: UserType = await response.json();
 
-  const POSTS_API_URL = `https://jsonplaceholder.typicode.com/posts?userId=${user.id}`;
+  const POSTS_API_URL = `${baseURL}/posts?userId=${user.id}`;
   const posts = await fetch(POSTS_API_URL);
   const postsData: Post[] = await posts.json();
 
