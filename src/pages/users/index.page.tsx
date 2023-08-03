@@ -2,10 +2,11 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { UserList } from "@/components/User";
 import Layout from "@/layouts/Layout";
 import User from "@/type/user.type";
 import baseURL from "@/utils/baseURL";
+
+import UserList from "./UserList";
 
 export const getServerSideProps: GetServerSideProps<{
   users: User[];

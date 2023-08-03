@@ -2,10 +2,11 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { CommentList } from "@/components/Comment";
 import Layout from "@/layouts/Layout";
 import Comment from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
+
+import CommentList from "./CommentList";
 
 export const getStaticProps: GetStaticProps<{
   comments: Comment[];

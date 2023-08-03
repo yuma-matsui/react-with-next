@@ -5,7 +5,7 @@ import useFetchSingleData from "@/hooks/useFetchSingleData";
 import Post from "@/type/post.type";
 import baseURL from "@/utils/baseURL";
 
-import { CommentListByPostId } from "../Comment";
+import CommentListByPostId from "./CommentListByPostId";
 
 const PostDetail = () => {
   const { query } = useRouter();

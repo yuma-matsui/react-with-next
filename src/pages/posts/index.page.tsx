@@ -2,10 +2,11 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { PostList } from "@/components/Post";
 import Layout from "@/layouts/Layout";
 import Post from "@/type/post.type";
 import baseURL from "@/utils/baseURL";
+
+import PostList from "./PostList";
 
 export const getStaticProps: GetStaticProps<{
   url: string;

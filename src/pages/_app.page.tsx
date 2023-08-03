@@ -9,7 +9,7 @@ import fetcher from "@/utils/fetcher";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig value={{ fetcher }}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </SWRConfig>
   );
 }

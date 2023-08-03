@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { PostDetail } from "@/components/Post";
 import Layout from "@/layouts/Layout";
 import Comment from "@/type/comment.type";
 import Post from "@/type/post.type";
 import baseURL from "@/utils/baseURL";
+
+import PostDetail from "./PostDetail";
 
 export const getServerSideProps: GetServerSideProps<{
   post: Post;

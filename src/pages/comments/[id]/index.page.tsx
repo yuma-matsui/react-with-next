@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { CommentDetail } from "@/components/Comment";
 import Layout from "@/layouts/Layout";
 import Comment from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
+
+import CommentDetail from "./CommentDetail";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(`${baseURL}/comments?_limit=10`);

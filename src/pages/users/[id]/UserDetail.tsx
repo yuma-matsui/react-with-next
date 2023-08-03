@@ -5,7 +5,7 @@ import useFetchSingleData from "@/hooks/useFetchSingleData";
 import User from "@/type/user.type";
 import baseURL from "@/utils/baseURL";
 
-import { PostListByUserId } from "../Post";
+import PostListByUserId from "./PostListByUserId";
 
 type Props = {
   id: number;
