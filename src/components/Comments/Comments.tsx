@@ -14,7 +14,11 @@ const Comments: FC = () => {
     <ul className="space-y-2">
       {data?.map(({ id, body }) => (
         <li key={id} className="border-b pb-2">
-          <Link href={`/comments/${id}`} className="block text-sm hover:text-blue-500">
+          <Link
+            href={`/comments/${id}`}
+            className="block text-sm hover:text-blue-500"
+            prefetch={false}
+          >
             {body}
           </Link>
         </li>

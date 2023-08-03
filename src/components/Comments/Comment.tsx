@@ -4,9 +4,8 @@ import React, { FC } from "react";
 import useComment from "@/hooks/useComment";
 
 const Comment: FC = () => {
-  const { data, isLoading, error } = useComment();
+  const { data, error } = useComment();
 
-  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
   return (
