@@ -5,12 +5,12 @@ import { SWRConfig } from "swr";
 
 import { CommentDetail } from "@/components/Comment";
 import Layout from "@/layouts/Layout";
-import CommentType from "@/type/comment.type";
+import Comment from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(`${baseURL}/comments?_limit=10`);
-  const comments: CommentType[] = await response.json();
+  const comments: Comment[] = await response.json();
   const paths = comments.map((comment) => ({
     params: { id: String(comment.id) },
   }));
