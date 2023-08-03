@@ -1,15 +1,19 @@
 import Link from "next/link";
 import React, { FC } from "react";
 
-import useCommentsByPostId from "@/hooks/useCommentsByPostId";
+import useFetchArray from "@/hooks/useFetchArray";
+import Comment from "@/type/comment.type";
 import Post from "@/type/post.type";
+import baseURL from "@/utils/baseURL";
 
 type Props = {
   postId: Post["id"];
 };
 
-const CommentsByPostId: FC<Props> = ({ postId }) => {
-  const { data, isLoading, error, hasData } = useCommentsByPostId(postId);
+const CommentListByPostId: FC<Props> = ({ postId }) => {
+  const { data, isLoading, error, hasData } = useFetchArray<Comment>(
+    `${baseURL}/posts/${postId}/comments`,
+  );
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
@@ -28,4 +32,4 @@ const CommentsByPostId: FC<Props> = ({ postId }) => {
   );
 };
 
-export default CommentsByPostId;
+export default CommentListByPostId;

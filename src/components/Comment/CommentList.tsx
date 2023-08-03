@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React, { FC } from "react";
 
-import useComments from "@/hooks/useComments";
+import useFetchArray from "@/hooks/useFetchArray";
+import Comment from "@/type/comment.type";
+import baseURL from "@/utils/baseURL";
 
-const Comments: FC = () => {
-  const { data, error, hasData } = useComments();
+const CommentList: FC = () => {
+  const { data, error, hasData } = useFetchArray<Comment>(`${baseURL}/comments`);
 
   if (!data && !error) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
@@ -27,4 +29,4 @@ const Comments: FC = () => {
   );
 };
 
-export default Comments;
+export default CommentList;

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { FC, ReactNode } from "react";
 
-import Header from "@/components/Header";
+import Header from "@/layouts/Header";
 
 type Props = {
   title: string;

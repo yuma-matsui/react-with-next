@@ -2,7 +2,7 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { Comments } from "@/components/Comments";
+import { CommentList } from "@/components/Comment";
 import Layout from "@/layouts/Layout";
 import Comment from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
@@ -28,7 +28,7 @@ const CommentsPage = ({ comments, url }: InferGetStaticPropsType<typeof getStati
   return (
     <SWRConfig value={{ fallback: { [url]: comments } }}>
       <Layout title="Comments Page">
-        <Comments />
+        <CommentList />
       </Layout>
     </SWRConfig>
   );

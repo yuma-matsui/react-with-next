@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { Comment } from "@/components/Comments";
+import { CommentDetail } from "@/components/Comment";
 import Layout from "@/layouts/Layout";
 import CommentType from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
@@ -47,7 +47,7 @@ const CommentPage = ({ url, comment }: InferGetStaticPropsType<typeof getStaticP
   return (
     <SWRConfig value={{ fallback: { [url]: comment } }}>
       <Layout title={`Comment ${query.id} Page`}>
-        <Comment />
+        <CommentDetail />
       </Layout>
     </SWRConfig>
   );

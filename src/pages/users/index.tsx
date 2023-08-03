@@ -2,7 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { Users } from "@/components/Users";
+import { UserList } from "@/components/User";
 import Layout from "@/layouts/Layout";
 import User from "@/type/user.type";
 import baseURL from "@/utils/baseURL";
@@ -27,7 +27,7 @@ const UsersPage = ({ users, url }: InferGetServerSidePropsType<typeof getServerS
   return (
     <SWRConfig value={{ fallback: { [url]: users } }}>
       <Layout title="Users Page">
-        <Users />
+        <UserList />
       </Layout>
     </SWRConfig>
   );

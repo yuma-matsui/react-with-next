@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React, { FC } from "react";
 
-import useUsers from "@/hooks/useUsers";
+import useFetchArray from "@/hooks/useFetchArray";
+import User from "@/type/user.type";
+import baseURL from "@/utils/baseURL";
 
-const Users: FC = () => {
-  const { data, error, hasData } = useUsers();
+const UserList: FC = () => {
+  const { data, error, hasData } = useFetchArray<User>(`${baseURL}/users`);
 
   if (!hasData && !error) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
@@ -24,4 +26,4 @@ const Users: FC = () => {
   );
 };
 
-export default Users;
+export default UserList;

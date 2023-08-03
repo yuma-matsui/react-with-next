@@ -3,14 +3,14 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import { User } from "@/components/Users";
+import { UserDetail } from "@/components/User";
 import Layout from "@/layouts/Layout";
 import Post from "@/type/post.type";
-import UserType from "@/type/user.type";
+import User from "@/type/user.type";
 import baseURL from "@/utils/baseURL";
 
 export const getServerSideProps: GetServerSideProps<{
-  user: UserType;
+  user: User;
   postsData: Post[];
   url: {
     user: string;
@@ -20,9 +20,9 @@ export const getServerSideProps: GetServerSideProps<{
   const { id } = ctx.query;
   const USER_API_URL = `${baseURL}/users/${id}`;
   const response = await fetch(USER_API_URL);
-  const user: UserType = await response.json();
+  const user: User = await response.json();
 
-  const POSTS_API_URL = `${baseURL}/posts?userId=${user.id}`;
+  const POSTS_API_URL = `${baseURL}/users/${user.id}/posts`;
   const posts = await fetch(POSTS_API_URL);
   const postsData: Post[] = await posts.json();
 
@@ -48,7 +48,7 @@ const UserPage = ({
 
   return (
     <SWRConfig value={{ fallback: { [url.user]: user, [url.posts]: postsData } }}>
-      <Layout title={`User ${id} Page`}>{id && <User id={id} />}</Layout>
+      <Layout title={`User ${id} Page`}>{id && <UserDetail id={id} />}</Layout>
     </SWRConfig>
   );
 };

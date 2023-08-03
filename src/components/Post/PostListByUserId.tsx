@@ -1,14 +1,16 @@
 import Link from "next/link";
 import React, { FC } from "react";
 
-import usePostsByUserId from "@/hooks/usePostsByUserId";
+import useFetchArray from "@/hooks/useFetchArray";
+import Post from "@/type/post.type";
+import baseURL from "@/utils/baseURL";
 
 type Props = {
   userId: number;
 };
 
-const PostsByUserId: FC<Props> = ({ userId }) => {
-  const { data, error, hasData } = usePostsByUserId(userId);
+const PostListByUserId: FC<Props> = ({ userId }) => {
+  const { data, error, hasData } = useFetchArray<Post>(`${baseURL}/users/${userId}/posts`);
 
   if (!hasData && !error) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
@@ -28,4 +30,4 @@ const PostsByUserId: FC<Props> = ({ userId }) => {
   );
 };
 
-export default PostsByUserId;
+export default PostListByUserId;

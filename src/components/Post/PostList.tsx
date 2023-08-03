@@ -1,10 +1,13 @@
 import Link from "next/link";
 import React, { FC } from "react";
 
-import usePosts from "@/hooks/usePosts";
+import useFetchArray from "@/hooks/useFetchArray";
+import Post from "@/type/post.type";
+import baseURL from "@/utils/baseURL";
 
-const Posts: FC = () => {
-  const { data, error, isLoading, hasData } = usePosts();
+const PostList: FC = () => {
+  const { data, error, isLoading, hasData } = useFetchArray<Post>(`${baseURL}/posts`);
+
   if (isLoading) return <p>Loading....</p>;
   if (error) return <p>Something went wrong!</p>;
   if (!hasData) return <p>データは空です</p>;
@@ -23,4 +26,4 @@ const Posts: FC = () => {
   );
 };
 
-export default Posts;
+export default PostList;
