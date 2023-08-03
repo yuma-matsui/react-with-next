@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<{
   const COMMENT_API_URL = `${baseURL}/comments/${params?.id}`;
   const response = await fetch(COMMENT_API_URL);
 
-  if (!response.ok) return { notFound: true };
+  if (!response.ok) return { notFound: true, revalidate: 1 };
 
   const comment: Comment[] = await response.json();
 
@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps<{
       comment,
       url: COMMENT_API_URL,
     },
+    revalidate: 1,
   };
 };
 

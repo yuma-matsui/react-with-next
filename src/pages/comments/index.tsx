@@ -20,6 +20,7 @@ export const getStaticProps: GetStaticProps<{
       comments,
       url: COMMENTS_API_URL,
     },
+    revalidate: 1,
   };
 };
 
