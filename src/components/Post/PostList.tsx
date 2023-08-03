@@ -6,9 +6,8 @@ import Post from "@/type/post.type";
 import baseURL from "@/utils/baseURL";
 
 const PostList: FC = () => {
-  const { data, error, isLoading, hasData } = useFetchArray<Post>(`${baseURL}/posts`);
+  const { data, error, hasData } = useFetchArray<Post>(`${baseURL}/posts`);
 
-  if (isLoading) return <p>Loading....</p>;
   if (error) return <p>Something went wrong!</p>;
   if (!hasData) return <p>データは空です</p>;
 

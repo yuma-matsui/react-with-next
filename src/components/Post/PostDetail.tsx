@@ -10,9 +10,8 @@ import { CommentListByPostId } from "../Comment";
 const PostDetail = () => {
   const { query } = useRouter();
   const url = query.id ? `${baseURL}/posts/${query.id}` : null;
-  const { data, error, isLoading } = useFetchSingleData<Post>(url);
+  const { data, error } = useFetchSingleData<Post>(url);
 
-  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
   return (

@@ -11,11 +11,8 @@ type Props = {
 };
 
 const CommentListByPostId: FC<Props> = ({ postId }) => {
-  const { data, isLoading, error, hasData } = useFetchArray<Comment>(
-    `${baseURL}/posts/${postId}/comments`,
-  );
+  const { data, error, hasData } = useFetchArray<Comment>(`${baseURL}/posts/${postId}/comments`);
 
-  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
   if (!hasData) return <p>No Comments!</p>;
 
