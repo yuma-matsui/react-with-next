@@ -4,9 +4,9 @@ import React, { FC } from "react";
 import useComments from "@/hooks/useComments";
 
 const Comments: FC = () => {
-  const { data, isLoading, error, hasData } = useComments();
+  const { data, error, hasData } = useComments();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (!data && !error) return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
   if (!hasData) return <p>データは空です</p>;
 

@@ -1,14 +1,34 @@
-import { NextPage } from "next";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
+import { SWRConfig } from "swr";
 
 import { Comments } from "@/components/Comments";
 import Layout from "@/layouts/Layout";
+import Comment from "@/type/comment.type";
 
-const CommentsPage: NextPage = () => {
+export const getStaticProps: GetStaticProps<{
+  comments: Comment[];
+  url: string;
+}> = async () => {
+  const COMMENTS_API_URL = "https://jsonplaceholder.typicode.com/comments";
+  const response = await fetch(COMMENTS_API_URL);
+  const comments: Comment[] = await response.json();
+
+  return {
+    props: {
+      comments,
+      url: COMMENTS_API_URL,
+    },
+  };
+};
+
+const CommentsPage = ({ comments, url }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout title="Comments Page">
-      <Comments />
-    </Layout>
+    <SWRConfig value={{ fallback: { [url]: comments } }}>
+      <Layout title="Comments Page">
+        <Comments />
+      </Layout>
+    </SWRConfig>
   );
 };
 
