@@ -3,14 +3,12 @@ import React, { FC, ReactNode } from "react";
 
 import Header from "@/layouts/Header";
 
-import Footer from "./Footer";
-
 type Props = {
   title: string;
   children: ReactNode;
 };
 
-const Layout: FC<Props> = ({ title, children }) => {
+const HeaderOnlyLayout: FC<Props> = ({ title, children }) => {
   return (
     <>
       <Head>
@@ -18,9 +16,8 @@ const Layout: FC<Props> = ({ title, children }) => {
       </Head>
       <Header />
       <div className="flex flex-col mx-auto max-w-2xl items-center px-2 ">{children}</div>
-      <Footer />
     </>
   );
 };
 
-export default Layout;
+export default HeaderOnlyLayout;

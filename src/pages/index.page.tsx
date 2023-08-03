@@ -1,14 +1,15 @@
-import { NextPage } from "next";
-import React from "react";
+import React, { ReactElement } from "react";
 
-import Layout from "@/layouts/Layout";
+import HeaderOnlyLayout from "@/layouts/HeaderOnlyLayout";
 
-const Home: NextPage = () => {
-  return (
-    <Layout title="Index Page">
-      <h1>Top Page</h1>
-    </Layout>
-  );
+import { NextPageWithLayout } from "./_app.page";
+
+const Home: NextPageWithLayout = () => {
+  return <h1>Top Page</h1>;
+};
+
+Home.getLayout = (page: ReactElement) => {
+  return <HeaderOnlyLayout title="Top Page">{page}</HeaderOnlyLayout>;
 };
 
 export default Home;
