@@ -1,9 +1,11 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
 import Layout from "@/layouts/Layout";
+import { NextPageWithLayout } from "@/pages/_app.page";
 import Post from "@/type/post.type";
 import User from "@/type/user.type";
 import baseURL from "@/utils/baseURL";
@@ -39,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-const UserPage = ({
+const UserPage: NextPageWithLayout<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   user,
   postsData,
   url,
@@ -48,10 +50,17 @@ const UserPage = ({
   const id = Number.isNaN(Number(query.id)) ? undefined : Number(query.id);
 
   return (
-    <SWRConfig value={{ fallback: { [url.user]: user, [url.posts]: postsData } }}>
-      <Layout title={`User ${id} Page`}>{id && <UserDetail id={id} />}</Layout>
-    </SWRConfig>
+    <>
+      <Head>
+        <title>{`User No.${id} Page`}</title>
+      </Head>
+      <SWRConfig value={{ fallback: { [url.user]: user, [url.posts]: postsData } }}>
+        {id && <UserDetail id={id} />}
+      </SWRConfig>
+    </>
   );
 };
+
+UserPage.getLayout = Layout;
 
 export default UserPage;

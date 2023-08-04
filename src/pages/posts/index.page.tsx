@@ -1,11 +1,13 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import Layout from "@/layouts/Layout";
+import HeaderOnlyLayout from "@/layouts/HeaderOnlyLayout";
 import Post from "@/type/post.type";
 import baseURL from "@/utils/baseURL";
 
+import { NextPageWithLayout } from "../_app.page";
 import PostList from "./PostList";
 
 export const getStaticProps: GetStaticProps<{
@@ -24,14 +26,22 @@ export const getStaticProps: GetStaticProps<{
   };
 };
 
-const PostsPage = ({ url, posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PostsPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  url,
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <SWRConfig value={{ fallback: { [url]: posts } }}>
-      <Layout title="Posts Page">
+    <>
+      <Head>
+        <title>Posts List</title>
+      </Head>
+      <SWRConfig value={{ fallback: { [url]: posts } }}>
         <PostList />
-      </Layout>
-    </SWRConfig>
+      </SWRConfig>
+    </>
   );
 };
+
+PostsPage.getLayout = HeaderOnlyLayout;
 
 export default PostsPage;

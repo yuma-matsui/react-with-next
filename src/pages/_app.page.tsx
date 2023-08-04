@@ -2,14 +2,13 @@ import "@/styles/globals.css";
 
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { SWRConfig } from "swr";
 
 import fetcher from "@/utils/fetcher";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
+  getLayout?: (children: ReactNode) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
@@ -19,9 +18,5 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(
-    <SWRConfig value={{ fetcher }}>
-      <Component {...pageProps} />
-    </SWRConfig>,
-  );
+  return <SWRConfig value={{ fetcher }}>{getLayout(<Component {...pageProps} />)}</SWRConfig>;
 }

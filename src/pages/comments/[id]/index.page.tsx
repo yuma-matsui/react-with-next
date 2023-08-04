@@ -1,9 +1,11 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import Layout from "@/layouts/Layout";
+import HeaderOnlyLayout from "@/layouts/HeaderOnlyLayout";
+import { NextPageWithLayout } from "@/pages/_app.page";
 import Comment from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
 
@@ -42,16 +44,24 @@ export const getStaticProps: GetStaticProps<{
   };
 };
 
-const CommentPage = ({ url, comment }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const CommentPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  url,
+  comment,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { query } = useRouter();
 
   return (
-    <SWRConfig value={{ fallback: { [url]: comment } }}>
-      <Layout title={`Comment ${query.id} Page`}>
+    <>
+      <Head>
+        <title>{`Comment No.${query.id} Page`}</title>
+      </Head>
+      <SWRConfig value={{ fallback: { [url]: comment } }}>
         <CommentDetail />
-      </Layout>
-    </SWRConfig>
+      </SWRConfig>
+    </>
   );
 };
+
+CommentPage.getLayout = HeaderOnlyLayout;
 
 export default CommentPage;

@@ -1,9 +1,11 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import Layout from "@/layouts/Layout";
+import HeaderOnlyLayout from "@/layouts/HeaderOnlyLayout";
+import { NextPageWithLayout } from "@/pages/_app.page";
 import Comment from "@/type/comment.type";
 import Post from "@/type/post.type";
 import baseURL from "@/utils/baseURL";
@@ -42,7 +44,7 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-const PostPage = ({
+const PostPage: NextPageWithLayout<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
   post,
   comments,
   url,
@@ -50,12 +52,17 @@ const PostPage = ({
   const { query } = useRouter();
 
   return (
-    <SWRConfig value={{ fallback: { [url.post]: post, [url.comments]: comments } }}>
-      <Layout title={`Post ${query.id} Page`}>
+    <>
+      <Head>
+        <title>{`Post No.${query.id} Page`}</title>
+      </Head>
+      <SWRConfig value={{ fallback: { [url.post]: post, [url.comments]: comments } }}>
         <PostDetail />
-      </Layout>
-    </SWRConfig>
+      </SWRConfig>
+    </>
   );
 };
+
+PostPage.getLayout = HeaderOnlyLayout;
 
 export default PostPage;

@@ -1,15 +1,21 @@
-import React, { ReactElement } from "react";
+import Head from "next/head";
+import React from "react";
 
 import HeaderOnlyLayout from "@/layouts/HeaderOnlyLayout";
 
 import { NextPageWithLayout } from "./_app.page";
 
 const Home: NextPageWithLayout = () => {
-  return <h1>Top Page</h1>;
+  return (
+    <>
+      <Head>
+        <title>Home Page</title>
+      </Head>
+      <h1>Home Page</h1>
+    </>
+  );
 };
 
-Home.getLayout = (page: ReactElement) => {
-  return <HeaderOnlyLayout title="Top Page">{page}</HeaderOnlyLayout>;
-};
+Home.getLayout = HeaderOnlyLayout;
 
 export default Home;

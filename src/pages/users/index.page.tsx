@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Head from "next/head";
 import React from "react";
 import { SWRConfig } from "swr";
 
@@ -6,6 +7,7 @@ import Layout from "@/layouts/Layout";
 import User from "@/type/user.type";
 import baseURL from "@/utils/baseURL";
 
+import { NextPageWithLayout } from "../_app.page";
 import UserList from "./UserList";
 
 export const getServerSideProps: GetServerSideProps<{
@@ -24,14 +26,22 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-const UsersPage = ({ users, url }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const UsersPage: NextPageWithLayout<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
+  users,
+  url,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <SWRConfig value={{ fallback: { [url]: users } }}>
-      <Layout title="Users Page">
+    <>
+      <Head>
+        <title>Users List</title>
+      </Head>
+      <SWRConfig value={{ fallback: { [url]: users } }}>
         <UserList />
-      </Layout>
-    </SWRConfig>
+      </SWRConfig>
+    </>
   );
 };
+
+UsersPage.getLayout = Layout;
 
 export default UsersPage;

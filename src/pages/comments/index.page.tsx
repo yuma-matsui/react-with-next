@@ -1,11 +1,13 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import React from "react";
 import { SWRConfig } from "swr";
 
-import Layout from "@/layouts/Layout";
+import HeaderOnlyLayout from "@/layouts/HeaderOnlyLayout";
 import Comment from "@/type/comment.type";
 import baseURL from "@/utils/baseURL";
 
+import { NextPageWithLayout } from "../_app.page";
 import CommentList from "./CommentList";
 
 export const getStaticProps: GetStaticProps<{
@@ -25,14 +27,22 @@ export const getStaticProps: GetStaticProps<{
   };
 };
 
-const CommentsPage = ({ comments, url }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const CommentsPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  comments,
+  url,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <SWRConfig value={{ fallback: { [url]: comments } }}>
-      <Layout title="Comments Page">
+    <>
+      <Head>
+        <title>Comment List</title>
+      </Head>
+      <SWRConfig value={{ fallback: { [url]: comments } }}>
         <CommentList />
-      </Layout>
-    </SWRConfig>
+      </SWRConfig>
+    </>
   );
 };
+
+CommentsPage.getLayout = HeaderOnlyLayout;
 
 export default CommentsPage;
