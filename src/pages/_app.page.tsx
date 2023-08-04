@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import React, { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 import { SWRConfig } from "swr";
 
 import fetcher from "@/utils/fetcher";
@@ -18,5 +19,22 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return <SWRConfig value={{ fetcher }}>{getLayout(<Component {...pageProps} />)}</SWRConfig>;
+  return (
+    <SWRConfig value={{ fetcher }}>
+      {getLayout(
+        <>
+          <Component {...pageProps} />
+          <Toaster
+            toastOptions={{
+              duration: 2000,
+              style: {
+                background: "green",
+                color: "white",
+              },
+            }}
+          />
+        </>,
+      )}
+    </SWRConfig>
+  );
 }
