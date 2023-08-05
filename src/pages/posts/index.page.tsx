@@ -11,8 +11,9 @@ import { NextPageWithLayout } from "../_app.page";
 import PostList from "./PostList";
 
 export const getStaticProps: GetStaticProps<{
-  url: string;
-  posts: Post[];
+  fallback: {
+    [key: string]: Post[];
+  };
 }> = async () => {
   const POSTS_API_URL = `${baseURL}/posts`;
   const response = await fetch(POSTS_API_URL);
@@ -20,22 +21,22 @@ export const getStaticProps: GetStaticProps<{
 
   return {
     props: {
-      url: POSTS_API_URL,
-      posts,
+      fallback: {
+        [POSTS_API_URL]: posts,
+      },
     },
   };
 };
 
 const PostsPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  url,
-  posts,
+  fallback,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
         <title>Posts List</title>
       </Head>
-      <SWRConfig value={{ fallback: { [url]: posts } }}>
+      <SWRConfig value={{ fallback }}>
         <PostList />
       </SWRConfig>
     </>

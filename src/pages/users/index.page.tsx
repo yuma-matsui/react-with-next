@@ -11,8 +11,9 @@ import { NextPageWithLayout } from "../_app.page";
 import UserList from "./UserList";
 
 export const getServerSideProps: GetServerSideProps<{
-  users: User[];
-  url: string;
+  fallback: {
+    [key: string]: User[];
+  };
 }> = async () => {
   const USER_API_URL = `${baseURL}/users`;
   const response = await fetch(USER_API_URL);
@@ -20,22 +21,22 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      users,
-      url: USER_API_URL,
+      fallback: {
+        [USER_API_URL]: users,
+      },
     },
   };
 };
 
 const UsersPage: NextPageWithLayout<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
-  users,
-  url,
+  fallback,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <Head>
         <title>Users List</title>
       </Head>
-      <SWRConfig value={{ fallback: { [url]: users } }}>
+      <SWRConfig value={{ fallback }}>
         <UserList />
       </SWRConfig>
     </>

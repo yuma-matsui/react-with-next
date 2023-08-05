@@ -25,8 +25,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<{
-  comment: Comment[];
-  url: string;
+  fallback: {
+    [key: string]: Comment[];
+  };
 }> = async ({ params }) => {
   const COMMENT_API_URL = `${baseURL}/comments/${params?.id}`;
   const response = await fetch(COMMENT_API_URL);
@@ -37,16 +38,16 @@ export const getStaticProps: GetStaticProps<{
 
   return {
     props: {
-      comment,
-      url: COMMENT_API_URL,
+      fallback: {
+        [COMMENT_API_URL]: comment,
+      },
     },
     revalidate: 1,
   };
 };
 
 const CommentPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  url,
-  comment,
+  fallback,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { query } = useRouter();
 
@@ -55,7 +56,7 @@ const CommentPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticPr
       <Head>
         <title>{`Comment No.${query.id} Page`}</title>
       </Head>
-      <SWRConfig value={{ fallback: { [url]: comment } }}>
+      <SWRConfig value={{ fallback }}>
         <CommentDetail />
       </SWRConfig>
     </>

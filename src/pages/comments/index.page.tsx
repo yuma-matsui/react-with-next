@@ -11,8 +11,9 @@ import { NextPageWithLayout } from "../_app.page";
 import CommentList from "./CommentList";
 
 export const getStaticProps: GetStaticProps<{
-  comments: Comment[];
-  url: string;
+  fallback: {
+    [key: string]: Comment[];
+  };
 }> = async () => {
   const COMMENTS_API_URL = `${baseURL}/comments`;
   const response = await fetch(COMMENTS_API_URL);
@@ -20,23 +21,23 @@ export const getStaticProps: GetStaticProps<{
 
   return {
     props: {
-      comments,
-      url: COMMENTS_API_URL,
+      fallback: {
+        [COMMENTS_API_URL]: comments,
+      },
     },
     revalidate: 1,
   };
 };
 
 const CommentsPage: NextPageWithLayout<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  comments,
-  url,
+  fallback,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
         <title>Comment List</title>
       </Head>
-      <SWRConfig value={{ fallback: { [url]: comments } }}>
+      <SWRConfig value={{ fallback }}>
         <CommentList />
       </SWRConfig>
     </>
